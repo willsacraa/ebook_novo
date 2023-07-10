@@ -1,0 +1,253 @@
+# Controle de Processos Químicos {#cap1_v00}
+
+## Introdução
+
+```{r, include = TRUE, fig.align='center', echo=FALSE, out.width = '100%'}
+knitr::include_graphics("imagens/introducao_sistema.JPG")
+```
+
+
+Neste guia, exploraremos os fundamentos do controle de processos químicos, abordando conceitos essenciais e fornecendo insights sobre as técnicas e estratégias envolvidas nessa disciplina.
+
+O controle de processos químicos desempenha um papel fundamental em diversos setores industriais, como petroquímica, farmacêutica, alimentícia, química e muitos outros. Compreender e aplicar adequadamente os princípios de controle é essencial para otimizar a eficiência operacional, garantir a qualidade dos produtos, reduzir custos e manter a segurança nas plantas industriais.
+
+Neste guia, mergulharemos em conceitos básicos de controle de processos químicos. Começaremos explorando as variáveis de processo e os diferentes tipos de controle, desde malha aberta até malha fechada. Discutiremos os controladores PID, amplamente utilizados na indústria, e as estratégias de controle empregadas para lidar com desafios específicos.
+
+Além disso, abordaremos a importância da instrumentação de controle, destacando sensores e atuadores utilizados para medir e ajustar as variáveis do processo. Você também encontrará informações sobre sistemas de controle avançados, que permitem otimizar o desempenho global de uma planta industrial.
+
+Exploraremos um pouco do Software Simulink, ferramenta de modelagem e simulação de sistemas dinâmicos, incluindo processos químicos.
+
+Além dos conceitos fundamentais, também examinaremos dois tópicos-chave na área de controle de processos químicos: a modelagem matemática e a análise de malhas de controle. Abordaremos as funções de transferência, que descrevem a relação entre a entrada e a saída de um sistema, a linearização, técnica utilizada para simplificar a análise de sistemas não lineares, e a Matriz RGA, ferramenta utilizada na análise de malhas de controle multivariável, a qual pode ser utilizada para definir melhor pareamento de variáveis de processo.
+
+Com uma base sólida desses conceitos e técnicas, você estará preparado para compreender e projetar malhas de controle eficientes em processos químicos.
+
+Esperamos que este guia seja uma fonte valiosa de conhecimento e orientação para estudantes que desejam revisar seus conhecimentos em controle de processos químicos, principalmente para a disciplina ENG009.
+
+> Quer entender melhor o que é Controle de Processos Químicos? Assista ao vídeo abaixo:
+(Vídeo: Cheese, Catastrophes, & Process Control: Crash Course Engineering #25)
+
+<div class="embed-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/watch?v=BT_JUbpZ1lQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+</br>
+
+## Variáveis de Processo
+
+```{r, include = TRUE, fig.align='center', echo=FALSE}
+knitr::include_graphics("imagens/variaveis.JPG")
+```
+
+
+As variáveis de processo são características ou propriedades específicas de um sistema de controle que são medidas, monitoradas e controladas para garantir o bom funcionamento do processo químico. Elas representam as quantidades físicas que descrevem o estado e o desempenho do processo.
+
+Existem diferentes tipos de variáveis de processo, que podem incluir:
+
+ - Variáveis de entrada (variáveis manipuladas): São as variáveis que podem ser ajustadas ou controladas pelos operadores/controladores do sistema. Elas afetam diretamente o processo. Exemplos comuns são vazão de alimentação, temperatura de aquecimento, concentração de reagentes, entre outras. Variáveis que não integrem a malha de controle podem atuar como disturbios em um sistema.
+
+ - Variáveis de saída (variáveis controladas): São as variáveis que são medidas e controladas para monitorar o desempenho e a qualidade do processo. Elas são influenciadas pelas variáveis de entrada e podem ser afetadas por outras condições do processo. Exemplos incluem temperatura do produto, pH de uma solução, pressão do sistema, nível de um tanque, composição de um produto químico, entre outras.
+
+As variáveis de processo desempenham um papel fundamental no controle e na otimização do desempenho do sistema. Ao monitorar e controlar essas variáveis de maneira adequada, é possível garantir a estabilidade, a eficiência, a qualidade e a segurança do processo químico.
+
+É importante identificar as variáveis de processo relevantes para cada sistema específico, entender suas interações e definir estratégias de controle apropriadas para alcançar os objetivos desejados.
+
+## Instrumentação
+
+```{r, include = TRUE, fig.align='center', echo=FALSE}
+knitr::include_graphics("imagens/instrumentacao.jpg")
+```
+
+A instrumentação desempenha um papel crucial no controle de processos químicos, permitindo a medição precisa das variáveis de processo e o ajuste das condições operacionais. Aqui estão alguns aspectos importantes da instrumentação em controle:
+
+ - Sensores: Os sensores são dispositivos utilizados para medir as variáveis de processo. Eles convertem grandezas físicas, como temperatura, pressão, vazão, nível e composição química, em sinais elétricos ou digitais que podem ser processados pelo sistema de controle. Alguns exemplos de sensores comumente encontrados incluem:
+
+ - Termopares (TI): Medem a temperatura usando a diferença de potencial gerada entre dois metais diferentes em função da temperatura.
+
+  - Transmissores de pressão (PT): Medem a pressão e convertem em um sinal elétrico proporcional à pressão medida.
+
+ - Medidores de vazão (FI): Podem ser baseados em princípios como deslocamento positivo, turbina, eletromagnético ou ultrassônico, medindo a taxa de fluxo de um fluido.
+
+ - Medidores de nível (LI): Podem utilizar tecnologias como radar, ultrassom, pressão hidrostática ou boias para medir o nível de líquidos em tanques ou reservatórios.
+
+ - Atuadores: Os atuadores são dispositivos utilizados para ajustar as condições do processo com base nos sinais de controle recebidos do sistema de controle. Eles convertem sinais elétricos ou digitais em ações físicas. Alguns exemplos de atuadores comumente encontrados incluem:
+
+      
+      Válvulas de controle (CV): Regulam a vazão de fluidos ou gases por meio da abertura ou fechamento do orifício da válvula.
+
+      Válvulas de alívio de pressão (PRV): São utilizadas para proteger o sistema contra sobrepressão, liberando fluidos quando a pressão excede um limite predefinido.
+
+      Motores elétricos (EM): Convertem energia elétrica em energia mecânica, permitindo o ajuste de velocidades, posicionamento e outras ações físicas.
+
+      Bombas (P): Geram fluxo e pressão em um sistema para transportar líquidos ou fluidos.
+
+ - Siglas comuns na instrumentação em controle:
+      
+      
+      PLC: Controlador Lógico Programável (Programmable Logic Controller)
+      
+      DCS: Sistema de Controle Distribuído (Distributed Control System)
+      
+      SCADA: Supervisão, Controle e Aquisição de Dados (Supervisory Control and Data Acquisition)
+      
+      HMI: Interface Homem-Máquina (Human-Machine Interface)
+      
+      IO: Entrada e Saída (Input/Output)
+      
+      PID: Proporcional-Integral-Derivativo (Proportional-Integral-Derivative)
+      
+      HART: Protocolo de Comunicação de 4 a 20 mA (Highway Addressable Remote Transducer)
+      
+      RTD: Sensor de Temperatura de Resistência (Resistance Temperature Detector)
+      
+      4-20 mA: Faixa de corrente para transmissão de sinais analógicos.
+
+Essas siglas são apenas algumas das muitas que podem ser encontradas no contexto da instrumentação em controle. É importante estar familiarizado com essas siglas para entender as especificações dos dispositivos de instrumentação e sua integração com o sistema de controle. A instrumentação desempenha um papel crucial no monitoramento e no ajuste das variáveis de processo, permitindo que os sistemas de controle químico atinjam desempenho otimizado, segurança e eficiência.
+
+
+## Modelagem do Sistema
+
+```{r, include = TRUE, fig.align='center', echo=FALSE, out.width = '100%'}
+knitr::include_graphics("imagens/modelagem.JPG")
+```
+
+O processo de modelagem de um sistema de controle envolve a representação matemática do comportamento do sistema, permitindo a análise, a simulação e o projeto de estratégias de controle adequadas. Aqui estão os passos principais envolvidos nesse processo:
+
+ 1. Definição do objetivo: O primeiro passo é entender claramente qual é o objetivo do sistema de controle. Isso envolve identificar as variáveis de interesse, definir o comportamento desejado do sistema e estabelecer critérios de desempenho, como estabilidade, precisão, tempo de resposta, entre outros.
+ 
+ 2. Identificação das variáveis: É importante identificar as variáveis de entrada (variáveis manipuladas) e as variáveis de saída (variáveis controladas) do sistema. Essas variáveis podem ser medidas diretamente ou inferidas a partir de outras grandezas. Além disso, é necessário identificar quaisquer outras variáveis intermediárias relevantes para a modelagem do sistema.
+
+ 3. Coleta de dados: A coleta de dados experimentais é um passo fundamental para a modelagem precisa do sistema. Por meio de experimentos ou testes, as variáveis do sistema são monitoradas e registradas ao longo do tempo, permitindo a obtenção de um conjunto de dados que represente o comportamento dinâmico do sistema.
+
+ 4. Formulação do modelo: Com base nos dados coletados, é possível formular um modelo matemático que represente o comportamento do sistema. Isso pode ser feito por meio de equações diferenciais, equações de estado, funções de transferência ou outras formas de representação, dependendo da complexidade do sistema e do tipo de análise a ser realizada.
+ 
+ 5. Identificação dos parâmetros: Uma etapa importante é identificar os parâmetros desconhecidos do modelo. Isso pode ser feito por meio de técnicas de identificação de sistemas, como regressão linear, métodos estatísticos ou algoritmos de otimização. A identificação dos parâmetros permite ajustar o modelo aos dados experimentais e torná-lo mais preciso.
+
+ 6. Verificação e validação: O modelo deve ser verificado e validado para garantir sua precisão e confiabilidade. Isso envolve comparar as previsões do modelo com dados experimentais não utilizados na etapa de identificação. Se o modelo fornecer uma boa correspondência com os dados de validação, pode ser considerado adequado para análise e projeto de controle.
+
+ 7. Análise e projeto de controle: Com o modelo validado, é possível realizar análises de estabilidade, resposta transitória, resposta em frequência, sensibilidade, entre outras. Essas análises fornecem informações valiosas para o projeto de estratégias de controle adequadas, como a seleção de controladores, a sintonia de parâmetros e a avaliação de desempenho.
+
+ 8. Simulação computacional: A modelagem matemática também pode ser implementada em software de simulação, onde é possível testar diferentes estratégias de controle, ajustar parâmetros e analisar o desempenho do sistema antes da implementação prática.
+
+Esses conceitos de modelagem matemática são fundamentais para compreender e projetar malhas de controle eficientes. É importante considerar as características específicas do sistema e utilizar técnicas adequadas de modelagem para obter resultados precisos.
+
+A seguir, trouxemos mais informações de etapas que envolvem a modelagem de um sistema de controle.
+
+### Funções de Transferência
+
+```{r, include = TRUE, fig.align='center', echo=FALSE, out.width = '100%'}
+knitr::include_graphics("imagens/funcao_transferencia.jpg")
+```
+
+Uma função de transferência é uma representação matemática de um sistema dinâmico que descreve a relação entre a entrada e a saída do sistema em termos de frequência ou tempo. Em um contexto de controle de processos, a função de transferência é usada para modelar o comportamento de um processo químico ou físico.
+
+Uma função de transferência é definida pela razão das transformadas de Laplace da saída e da entrada do sistema. Ela é expressa na forma de polinômios, onde os coeficientes do numerador representam os pesos da entrada e os coeficientes do denominador representam os pesos da saída. A função de transferência pode incluir termos proporcionais, integrais e derivativos, dependendo da dinâmica do sistema.
+
+As funções de transferência são úteis para analisar e projetar sistemas de controle, pois permitem prever como o sistema responderá a diferentes entradas. Com base na função de transferência, é possível realizar análises de estabilidade, determinar a resposta transitória e a resposta em frequência do sistema, calcular margens de estabilidade e projetar controladores adequados.
+
+Por meio das funções de transferência, é possível determinar os ganhos do sistema.
+
+### Linearização
+
+A linearização é o processo de aproximar um sistema não linear com um sistema linear em torno de um ponto de operação específico. Isso é feito para simplificar a análise e o projeto do controle, uma vez que os sistemas lineares são mais bem compreendidos e possuem ferramentas matemáticas mais estabelecidas.
+
+A linearização é útil quando as não linearidades de um sistema não são significativas em torno de um ponto de operação específico. Essas não linearidades podem incluir relações não lineares entre variáveis, como coeficientes não lineares, funções trigonométricas, exponenciais, entre outros.
+
+O processo de linearização envolve duas etapas principais: a primeira é encontrar o ponto de operação em torno do qual a linearização será feita, e a segunda é derivar as equações lineares que descrevem o comportamento do sistema em torno desse ponto.
+A linearização pode ser realizada utilizando-se séries de Taylor ou outras técnicas de aproximação. É importante ressaltar que a linearização é uma simplificação e pode introduzir erros significativos em casos de não linearidades acentuadas. Portanto, é necessário avaliar cuidadosamente a validade da linearização em relação às características e faixas de operação do sistema.
+
+Em resumo, a linearização é uma técnica que aproxima sistemas não lineares como sistemas lineares em torno de um ponto de operação, facilitando a análise e o projeto de controle em casos adequados.
+
+### Matriz RGA
+
+A matriz RGA (Relative Gain Array), também conhecida como matriz de ganhos relativos, é uma ferramenta utilizada na análise de malhas de controle multivariável. Ela fornece informações sobre as interações entre as variáveis controladas de um sistema, ajudando a identificar as influências mútuas entre elas.
+
+A matriz RGA é uma matriz quadrada, onde cada elemento representa o ganho relativo entre uma variável controlada e uma variável manipulada. O ganho relativo é calculado como o efeito percentual de uma mudança em uma variável manipulada sobre a variação percentual em uma variável controlada, mantendo todas as outras variáveis manipuladas constantes.
+
+Uma matriz RGA bem condicionada indica que as interações entre as variáveis controladas são fracas, o que é desejável em uma malha de controle multivariável. Por outro lado, uma matriz RGA mal condicionada indica fortes interações entre as variáveis controladas, o que pode levar a problemas de desempenho e dificuldades de controle.
+
+A análise da matriz RGA pode ser usada para tomar decisões importantes no projeto de malhas de controle multivariável, como a seleção de variáveis manipuladas adequadas e a configuração de controladores individuais ou controladores multivariáveis, como controladores PID multivariáveis ou controladores baseados em modelo.
+
+Em resumo, a matriz RGA fornece uma visão quantitativa das interações entre as variáveis controladas em um sistema de controle multivariável, auxiliando no projeto e na otimização das malhas de controle, auxiliando na escolha do pareamento das variáveis de processo.
+
+```{r, include = TRUE, fig.align='center', echo=FALSE, out.width = '100%'}
+knitr::include_graphics("imagens/matrizrga.JPG")
+```
+
+## Estratégias de Controle
+
+As estratégias de controle são abordagens ou técnicas utilizadas para regular e manipular as variáveis de um sistema, com o objetivo de atingir as metas de desempenho estabelecidas. Existem diferentes estratégias de controle, como controle por realimentação (Feedback), controle em cascata, controle de razão e controle por compensação de tempos mortos. Cada estratégia tem suas próprias aplicações e benefícios, dependendo das características do processo.
+
+ - Controle em malha aberta e malha fechada: Existem dois tipos principais de controle de processo: malha aberta e malha fechada. No controle em malha aberta, a saída do processo não afeta o controle, enquanto no controle em malha fechada, a saída é medida e comparada com um valor de referência para ajustar o processo.
+
+ - Controladores PID: Os controladores Proporcional-Integral-Derivativo (PID) são amplamente utilizados no controle de processos químicos. Eles ajustam continuamente as variáveis do processo com base em feedback para minimizar erros, proporcionando uma resposta estável e precisa.
+ 
+```{r, include = TRUE, fig.align='center', echo=FALSE}
+knitr::include_graphics("imagens/estrategias_de_controle_PID_temperatura.png")
+```
+
+Exemplos de estratégias de controle:
+
+  - Malha de controle por realimentação (Feedback): Estratégia mais simples de aplicação, na qual as variáveis manipuladas são ajustadas diretamente de acordo com distúrbios nas variáveis controladas.
+
+  - Malha de controle em cascata: Nesta estratégia, controladores são postos em série, dividos entre primários e secundários. As respostas dos controladores primários são enviadas para os secundários antes de agir sobre as variáveis manipuladas.
+  
+  - Malha de controle de razão: Estratégia utilizada para manter a proporção entre duas ou mais variáveis de processo.
+  
+  - Malha de controle por compensação de tempos mortos: Estratégia utilizada em sistemas com longos tempos mortos, na qual age compensando o tempo de resposta.
+
+  - Natureza dimensional de sistemas:
+    
+      
+      SISO: Uma entrada para uma saída
+      
+      SIMO: Uma entrada para múltiplas saídas
+      
+      MISO: Múltiplas entradas para uma saída
+      
+      MIMO: Múltiplas entradas para múltiplas saídas
+
+
+## Simulink 
+
+```{r, include = TRUE, fig.align='center', echo=FALSE, out.width = '100%'}
+knitr::include_graphics("imagens/matlab_simulink.png")
+```
+
+O Simulink é uma ferramenta de modelagem e simulação desenvolvida pela MathWorks. É amplamente utilizado na indústria e nas disciplinas universitárias para projetar, simular e analisar sistemas dinâmicos, incluindo processos químicos.
+
+O Simulink é baseado na linguagem de programação MATLAB e utiliza um ambiente gráfico de blocos, permitindo que os usuários criem modelos de sistemas usando blocos pré-definidos e interconectem esses blocos para representar o comportamento do sistema.
+
+Com o Simulink, é possível construir modelos matemáticos de processos químicos e sistemas de controle, representando as relações entre as variáveis, as equações diferenciais e os algoritmos de controle. Esses modelos podem ser lineares ou não lineares, e podem incorporar a dinâmica dos processos, bem como os controladores utilizados para regular as variáveis do sistema.
+
+Uma das principais vantagens do Simulink é a capacidade de simular o comportamento do sistema em tempo real ou em um intervalo de tempo especificado. Isso permite que os engenheiros e pesquisadores testem diferentes cenários, ajustem parâmetros e avaliem o desempenho do sistema antes da implementação prática.
+
+Além disso, o Simulink oferece ferramentas para análise e visualização dos resultados da simulação, permitindo que os usuários extraiam informações valiosas sobre o desempenho do processo, a estabilidade, a resposta transitória, a resposta em frequência e muito mais.
+
+O uso do Simulink no controle de processos químicos oferece uma abordagem prática e eficiente para explorar diferentes estratégias de controle, otimizar parâmetros e realizar experimentos virtuais em um ambiente seguro e controlado.
+
+Exemplos de utilização do Simulink:
+
+ - Controle de Temperatura em um Reator Químico: O Simulink pode ser usado para modelar o comportamento dinâmico de um reator químico e implementar um controlador para regular a temperatura. O modelo pode incorporar as equações diferenciais que descrevem a cinética química, a transferência de calor e as interações entre as variáveis. O Simulink permite simular diferentes estratégias de controle, como controladores PID, controle por realimentação e controle preditivo.
+
+ - Controle de Nível em um Tanque: O Simulink pode ser utilizado para modelar um sistema de controle de nível em um tanque, considerando as equações de conservação de massa e as características hidráulicas do sistema. Com o Simulink, é possível implementar um controlador que ajuste a vazão de entrada e saída para manter o nível desejado. Diferentes estratégias de controle, como controle em cascata ou controle de razão, podem ser avaliadas e otimizadas.
+
+ - Controle de pH em um Processo de Neutralização: O Simulink pode ser empregado para modelar um processo de neutralização química, onde um controlador é necessário para manter o pH em um valor específico. O modelo pode incluir as reações químicas envolvidas e a dinâmica do sistema de mistura. Com o Simulink, é possível projetar e testar diferentes algoritmos de controle, como controladores PID adaptativos, para garantir um pH estável e preciso.
+
+ - Controle de Vazão em um Sistema de Distribuição de Fluidos: O Simulink pode ser utilizado para modelar um sistema de distribuição de fluidos, como um sistema de tubulação em uma planta industrial. O controle de vazão é fundamental para garantir que os fluidos sejam direcionados corretamente para diferentes processos. Com o Simulink, é possível criar modelos que considerem a dinâmica do sistema e implementar controladores para ajustar as válvulas e as bombas de acordo com as demandas do processo.
+
+Esses exemplos demonstram a versatilidade do Simulink em diferentes aplicações de controle de processos químicos. O software permite a modelagem, a simulação e a implementação de estratégias de controle personalizadas, proporcionando um ambiente virtual para explorar e otimizar o desempenho do sistema antes da implementação prática.
+
+
+```{r, include = TRUE, fig.align='center', echo=FALSE, out.width = '100%'}
+knitr::include_graphics("imagens/simulink.png")
+```
+
+
+## References {-}
+
+[1] Seborg, D. E., Edgar, T. F., & Mellichamp, D. A. (2010). Process Dynamics and Control. Wiley.
+
+[2] Stephanopoulos, G. (1996). Chemical Process Control: An Introduction to Theory and Practice. Prentice Hall.
+
+[3] OGATA, Katsuhiko. Engenharia de Controle Moderno, 5a. edição. Editora. LTC. Rio de Janeiro, v. 12, 2011.
+
+[4] Material da disciplina ENG009 - 2023.1

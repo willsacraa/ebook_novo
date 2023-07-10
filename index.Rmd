@@ -1,0 +1,21 @@
+--- 
+title: 'Controle de Processos Químicos: Conceitos e Aplicações'
+author:
+- Gabriel de Azevedo Silva Carrilho Simões
+- Laio Luis Barbosa Ribeiro
+- William Cardoso Sacramento
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: []
+biblio-style: apalike
+link-citations: yes
+always_allow_html: yes
+---
+
+# Prefácio {-}
+
+```
+Ebook em desenvolvimento
+```
+
+
